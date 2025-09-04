@@ -1,4 +1,4 @@
-## ts-cli-plugin
+## ts-cli-plugin [![CI](https://github.com/mike-north/ts-cli-grpc-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/mike-north/ts-cli-grpc-plugin/actions/workflows/ci.yml)
 
 TypeScript library for writing CLI plugins compatible with HashiCorp's go-plugin (gRPC protocol). It boots a gRPC server that:
 
