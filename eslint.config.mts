@@ -14,10 +14,10 @@ export default defineConfig(
     },
   },
   {
-    ignores: ["dist/**/*"],
+    ignores: ["**/dist/**/*"],
   },
   {
-    files: ["src/**/*.ts", "test/**/*.ts", "examples/**/*.ts"],
+    files: ["src/**/*.ts", "test/**/*.ts", "examples/**/*.ts", "ts-cli-plugin/bin/ts-cli-plugin"],
     rules: {},
-  }
+  },
 );

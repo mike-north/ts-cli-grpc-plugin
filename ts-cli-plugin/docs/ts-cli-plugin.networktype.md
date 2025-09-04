@@ -4,7 +4,9 @@
 
 ## NetworkType type
 
-Network type for the gRPC server.
+Union of supported network types for the gRPC server.
+
+- "tcp": bind to a host:port (e.g. `127.0.0.1:0` for an ephemeral port) - "unix": bind to a filesystem UNIX domain socket path
 
 **Signature:**
 

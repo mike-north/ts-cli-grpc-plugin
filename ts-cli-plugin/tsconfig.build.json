@@ -1,15 +1,8 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2024",
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "strict": true,
-    "skipLibCheck": false,
-    "allowJs": false,
-    "forceConsistentCasingInFileNames": true
+    "rootDir": "./src",
+    "outDir": "./dist"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist/**/*"]

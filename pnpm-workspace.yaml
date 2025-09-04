@@ -1,0 +1,6 @@
+packages:
+  - ts-cli-plugin
+  - examples/*
+onlyBuiltDependencies:
+  - esbuild
+  - oxc-resolver

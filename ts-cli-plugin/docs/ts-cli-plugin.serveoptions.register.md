@@ -4,7 +4,7 @@
 
 ## ServeOptions.register property
 
-Optional callback to register your service(s) on the server.
+Optional callback to register your gRPC service definition(s) on the server.
 
 **Signature:**
 

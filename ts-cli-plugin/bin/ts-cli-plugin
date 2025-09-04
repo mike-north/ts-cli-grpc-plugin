@@ -1,26 +1,101 @@
 #!/usr/bin/env node
-/* eslint-disable */
+/**
+ * ts-cli-plugin CLI entrypoint
+ *
+ * Starts a gRPC plugin server compatible with HashiCorp go-plugin by
+ * delegating to `servePlugin` from this package. It optionally loads a
+ * user-supplied module that exports a `register(server)` function used to
+ * attach your gRPC service definitions to the server.
+ *
+ * Usage:
+ *   ts-cli-plugin [-a ADDRESS] [-n NETWORK] [-p APP_PROTO_VERSION] [-m MODULE]
+ *
+ * Options:
+ * - -a, --address              Address to bind. For tcp use host[:port]; for unix use a socket path.
+ *                               Defaults to "127.0.0.1". If tcp port omitted, an ephemeral port is chosen.
+ * - -n, --network              Network type: "tcp" | "unix". Defaults to "tcp".
+ * - -p, --app-proto-version    Application protocol version (number). Defaults to 1.
+ * - -m, --module               Path to a JS/TS module exporting a `register` function (or default export).
+ *                               TS files (.ts/.mts/.cts) are loaded via jiti at runtime.
+ *
+ * Behavior:
+ * - Prints a single handshake line to stdout after the server starts, which the host process consumes.
+ * - Exits with code 1 and prints the error if startup fails.
+ */
 const { servePlugin } = require("../dist/index.js");
 const path = require("node:path");
+const createJiti = require("jiti");
 
+/**
+ * Parse CLI arguments into options compatible with `servePlugin`.
+ *
+ * Recognized flags:
+ * - `-a`, `--address` string
+ * - `-n`, `--network` ("tcp" | "unix")
+ * - `-p`, `--app-proto-version` number
+ * - `-m`, `--module` path to JS/TS module exporting `register`
+ *
+ * Defaults:
+ * - address: "127.0.0.1"
+ * - networkType: "tcp"
+ * - appProtocolVersion: 1
+ *
+ * @returns {{
+ *   address: string,
+ *   networkType: 'tcp' | 'unix',
+ *   appProtocolVersion: number,
+ *   register: (undefined | null | ((server: import('@grpc/grpc-js').Server) => void)),
+ *   module: (string | null)
+ * }}
+ */
 function parseArgs() {
   const args = process.argv.slice(2);
-  const out = { address: "127.0.0.1", networkType: "tcp", appProtocolVersion: 1, register: null, module: null };
+  const out = {
+    address: "127.0.0.1",
+    networkType: "tcp",
+    appProtocolVersion: 1,
+    register: null,
+    module: null,
+  };
   for (let i = 0; i < args.length; i++) {
     const a = args[i];
-    if ((a === "-a" || a === "--address") && args[i+1]) { out.address = args[++i]; continue; }
-    if ((a === "-n" || a === "--network") && args[i+1]) { out.networkType = args[++i]; continue; }
-    if ((a === "-p" || a === "--app-proto-version") && args[i+1]) { out.appProtocolVersion = Number(args[++i]); continue; }
-    if ((a === "-m" || a === "--module") && args[i+1]) { out.module = args[++i]; continue; }
+    if ((a === "-a" || a === "--address") && args[i + 1]) {
+      out.address = args[++i];
+      continue;
+    }
+    if ((a === "-n" || a === "--network") && args[i + 1]) {
+      out.networkType = args[++i];
+      continue;
+    }
+    if ((a === "-p" || a === "--app-proto-version") && args[i + 1]) {
+      out.appProtocolVersion = Number(args[++i]);
+      continue;
+    }
+    if ((a === "-m" || a === "--module") && args[i + 1]) {
+      out.module = args[++i];
+      continue;
+    }
   }
   return out;
 }
 
 (async () => {
+  /**
+   * Compute options from CLI and, if provided, load a user module that exports
+   * a `register(server)` function to attach gRPC services. When the module has a
+   * TypeScript extension (.ts/.mts/.cts) it is loaded via jiti to support ESM/TS
+   * without a build step; otherwise Node's `require` is used.
+   */
   const opts = parseArgs();
   if (opts.module) {
     const modPath = path.resolve(process.cwd(), opts.module);
-    const mod = require(modPath);
+    const jiti = createJiti(__filename, {
+      interopDefault: true,
+      esmResolve: true,
+    });
+    const mod = /\.(ts|mts|cts)$/i.test(modPath)
+      ? jiti(modPath)
+      : require(modPath);
     const register = mod.register || mod.default || mod;
     if (typeof register === "function") {
       opts.register = register;
@@ -31,5 +106,3 @@ function parseArgs() {
   console.error(err);
   process.exit(1);
 });
-
-

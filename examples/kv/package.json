@@ -1,0 +1,36 @@
+{
+  "name": "@examples/kv",
+  "version": "0.0.1",
+  "private": true,
+  "type": "commonjs",
+  "main": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js",
+      "require": "./dist/plugin.js"
+    },
+    "./register": {
+      "import": "./dist/register.js",
+      "require": "./dist/register.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -P tsconfig.json",
+    "lint": "eslint .",
+    "clean": "rimraf dist",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "rimraf": "^6.0.1",
+    "typescript": "5.8.2",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.4",
+    "@grpc/proto-loader": "^0.8.0",
+    "package-up": "^5.0.0",
+    "ts-cli-plugin": "workspace:*"
+  }
+}

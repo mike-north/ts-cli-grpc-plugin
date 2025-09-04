@@ -4,7 +4,9 @@
 
 ## servePlugin() function
 
-Serves the plugin.
+Starts a gRPC server suitable for a go-plugin host and writes the handshake line to stdout.
+
+This function: - Registers a minimal gRPC Health service and reports `SERVING` for service "plugin" - Optionally registers the internal `GRPCStdio` and `GRPCController` services if the corresponding protos are available (when the `go-plugin` submodule exists) - Invokes your [register](./ts-cli-plugin.serveoptions.register.md) callback so you can add your own services - Binds the server to the requested address (choosing an ephemeral port for TCP if none supplied) - Emits a single handshake line to stdout using [formatHandshake()](./ts-cli-plugin.formathandshake.md)
 
 **Signature:**
 
@@ -45,7 +47,7 @@ options
 
 </td><td>
 
-The options for serving the plugin.
+Server configuration and (optional) service registration callback.
 
 
 </td></tr>
@@ -55,5 +57,31 @@ The options for serving the plugin.
 
 Promise&lt;{ server: grpc.Server; address: string; }&gt;
 
-The server and address.
+An object containing the started `server` and the final `address` it is bound to.
+
+## Exceptions
+
+If the server fails to bind to the requested address.
+
+## Remarks
+
+- For `networkType` "tcp", if you omit the port (e.g. `127.0.0.1`<!-- -->), an ephemeral port is chosen and returned. - For `networkType` "unix", the path will be prefixed with `unix:` as required by gRPC if not already present. - This function writes the handshake line to `process.stdout` exactly once after the server starts. - When internal protos are present, stdout/stderr writes are mirrored over the `GRPCStdio` stream expected by the host.
+
+## Example
+
+Start a server on an ephemeral port and register your own service(s):
+
+```ts
+import * as grpc from "@grpc/grpc-js";
+import { servePlugin } from "ts-cli-plugin";
+
+const { server, address } = await servePlugin({
+  appProtocolVersion: 1,
+  address: "127.0.0.1:0",
+  register(s: grpc.Server) {
+    s.addService(MyServiceDefinition, handlers)
+  },
+});
+console.log("listening on", address);
+```
 

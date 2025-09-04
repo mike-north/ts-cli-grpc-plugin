@@ -19,14 +19,27 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[@grpc/grpc-js](./grpc-js.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [ts-cli-plugin](./ts-cli-plugin.md)
 
 
 </td><td>
 
-TypeScript library for writing CLI plugins compatible with HashiCorp's go-plugin (gRPC protocol). It boots a gRPC server that:
+TypeScript library for writing CLI plugins compatible with HashiCorp's go-plugin (gRPC protocol).
 
-- Registers the gRPC Health service and reports SERVING for service "plugin" - Prints the expected handshake line to stdout: `CORE|APP|NETWORK|ADDR|grpc` - Implements the internal `GRPCStdio` and `GRPCController` services expected by the go-plugin host
+This package exposes small, focused primitives to help you bring up a gRPC server that can speak to a go-plugin host:
+
+- Registers the gRPC Health service and reports SERVING for service "plugin" so the host can probe readiness - Emits the expected handshake line on stdout in the form `CORE|APP|NETWORK|ADDR|grpc` so the host can connect - Optionally wires up the internal `GRPCStdio` and `GRPCController` services when the corresponding protos are present - Lets you register your own gRPC services via a simple callback
+
+The most common entry point is [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->, which binds a local server and writes the handshake line that the host process consumes on stdout. For convenience, [formatHandshake()](./ts-cli-plugin.formathandshake.md) is also exported if you need to compute the handshake string manually.
 
 
 </td></tr>

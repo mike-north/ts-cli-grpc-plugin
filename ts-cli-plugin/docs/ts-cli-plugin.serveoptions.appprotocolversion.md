@@ -4,7 +4,7 @@
 
 ## ServeOptions.appProtocolVersion property
 
-Application protocol version determined by the host app.
+Application protocol version expected by the host application.
 
 **Signature:**
 

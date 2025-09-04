@@ -2,13 +2,7 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "noEmit": true,
-    "allowJs": true
+    "rootDir": "."
   },
-  "include": [
-    "src",
-    "test",
-    "eslint.config.mts",
-    "examples"
-  ],
-  "exclude": ["node_modules", "dist/**/*"]
+  "include": ["src", "test", "bin/ts-cli-plugin"]
 }

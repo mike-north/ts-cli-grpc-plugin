@@ -4,7 +4,7 @@
 
 ## ServeOptions.networkType property
 
-Network type for the gRPC server.
+Network type for the gRPC server. Defaults to "tcp".
 
 **Signature:**
 

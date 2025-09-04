@@ -1,183 +1,91 @@
-## ts-cli-plugin [![CI](https://github.com/mike-north/ts-cli-grpc-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/mike-north/ts-cli-grpc-plugin/actions/workflows/ci.yml)
+## ts-cli-grpc-plugin (monorepo)
 
-TypeScript library for writing CLI plugins compatible with HashiCorp's go-plugin (gRPC protocol). It boots a gRPC server that:
+TypeScript gRPC plugin toolkit compatible with HashiCorp's go-plugin, plus runnable examples and the upstream `go-plugin` pinned as a submodule.
 
-- Registers the gRPC Health service and reports SERVING for service "plugin"
-- Prints the expected handshake line to stdout: `CORE|APP|NETWORK|ADDR|grpc`
-- Implements the internal `GRPCStdio` and `GRPCController` services expected by the go-plugin host
+- `ts-cli-plugin/`: TypeScript library and CLI wrapper for serving plugins over gRPC
+- `examples/`: Example plugins built with the library (e.g., `kv/`)
+- `go-plugin/`: Upstream HashiCorp `go-plugin` submodule used for proto definitions and host examples (pinned)
 
-The repo includes the upstream `hashicorp/go-plugin` as a git submodule (pinned) so we can reuse internal protos and validate examples. See upstream project for background and architecture: [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin).
+Upstream reference: [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin)
 
+### Prerequisites
 
-## Install and build
+- Node.js and pnpm (this repo uses pnpm workspaces)
+- Go toolchain (for building/running the upstream Go host examples)
 
-This package is built with pnpm. From `ts-cli-plugin/`:
-
-```bash
-pnpm install
-pnpm run build
-```
-
-You can consume the library via source in this monorepo, or publish it and install it in your own project.
-
-
-## Quick start
-
-### Use the library API
-
-Implement your service, then call `servePlugin` and pass a `register(server)` callback that registers your gRPC service(s).
-
-```ts
-import { servePlugin } from "ts-cli-plugin";
-import * as grpc from "@grpc/grpc-js";
-import * as protoLoader from "@grpc/proto-loader";
-
-// Load your service definition (example)
-const def = protoLoader.loadSync(["./proto/kv.proto"], { keepCase: true, longs: String, enums: String, defaults: true, oneofs: true });
-const { proto } = (grpc.loadPackageDefinition(def) as any);
-
-const kvImpl = {
-  async get(call: any, cb: any) { /* ... */ },
-  async put(call: any, cb: any) { /* ... */ }
-};
-
-servePlugin({
-  appProtocolVersion: 1,
-  address: "127.0.0.1", // host will connect to 127.0.0.1:<ephemeral>
-  networkType: "tcp",
-  register(server) {
-    server.addService(proto.KV.service, kvImpl);
-  },
-});
-```
-
-The process will print one line like `1|1|tcp|127.0.0.1:12345|grpc` and keep serving until the host requests shutdown.
-
-### Use the CLI wrapper
-
-The included CLI bin lets you export a `register(server)` function from a JS module and run a plugin without writing a full `main`.
-
-```bash
-# Build first
-pnpm run build
-
-# Run the CLI; the module must export register(server)
-node ./bin/ts-cli-plugin \
-  --module /absolute/path/to/register.js \
-  --address 127.0.0.1 \
-  --app-proto-version 1
-```
-
-Supported flags:
-- `--address` (default `127.0.0.1`)
-- `--network` (`tcp`|`unix`, default `tcp`)
-- `--app-proto-version` (number, default `1`)
-- `--module` (path to module exporting `register(server)`)
-
-
-## End-to-end with the upstream KV example
-
-This repository includes the upstream `go-plugin` as a submodule; we use its KV example host to validate.
-
-```bash
-# Build the TS library
-cd ts-cli-plugin
-pnpm run build
-
-# Build the Go KV host
-cd ../go-plugin/examples/grpc
-go build -o kv
-
-# Point the host at our Node plugin (register.js provided in examples/kv)
-export KV_PLUGIN='node /absolute/path/to/ts-cli-plugin/bin/ts-cli-plugin \
-  --module /absolute/path/to/ts-cli-plugin/examples/kv/register.js \
-  --address 127.0.0.1 \
-  --app-proto-version 1'
-
-./kv put hello world
-./kv get hello
-# -> prints: world
-```
-
-Seeing EOF/GOAWAY messages in plugin logs during shutdown is expected; the host closes the transport after the request.
-
-
-## API reference
-
-### `servePlugin(options)`
-
-Boots the plugin gRPC server and prints the handshake line.
-
-```ts
-type NetworkType = "tcp" | "unix";
-
-interface ServeOptions {
-  appProtocolVersion: number; // host-defined application version
-  address: string;            // e.g. "127.0.0.1" (ephemeral port auto-assigned) or unix socket path
-  networkType?: NetworkType;  // default "tcp"
-  register?: (server: grpc.Server) => void; // register your gRPC services
-}
-```
-
-Behavior:
-- Health service is registered and returns SERVING for service "plugin"
-- Internal `GRPCStdio` and `GRPCController` services are registered automatically
-- For `tcp`, the server binds to an ephemeral port and prints the final `host:port` in the handshake
-
-### `formatHandshake(core, app, network, addr, protocol)`
-
-Returns a string in the format required by go-plugin, e.g. `1|1|tcp|127.0.0.1:1234|grpc`.
-
-### Helpers
-
-```ts
-import { loadProtos, createRegistrar } from "ts-cli-plugin/dist/helpers";
-
-const pkgs = loadProtos({ files: ["./proto/kv.proto"] });
-const register = createRegistrar((server) => {
-  server.addService(pkgs.proto.KV.service, kvImpl);
-});
-```
-
-
-## Internal plugin services
-
-This library auto-loads and serves the internal services that the go-plugin host expects:
-
-- `plugin.GRPCStdio` (streams STDOUT/STDERR)
-- `plugin.GRPCController` (shutdown)
-
-The proto files are loaded from the `go-plugin` submodule, and `google-proto-files` is used to resolve standard Google imports.
-
-
-## Handshake and health
-
-- Handshake line format: `CORE-PROTOCOL-VERSION|APP-PROTOCOL-VERSION|NETWORK-TYPE|NETWORK-ADDR|grpc`.
-- Health service must report `SERVING` for the service name `"plugin"`. The library sets this for you.
-
-For more details, see the upstream docs on writing non-Go plugins and internals:
-- Writing plugins without Go (gRPC): see `docs/guide-plugin-write-non-go.md` in upstream [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin).
-
-
-## Submodule and version pin
-
-The `go-plugin` submodule is pinned to a specific tag to keep behavior stable with internal protos. To update:
+### Setup
 
 ```bash
 git submodule update --init
-cd go-plugin && git fetch --tags && git checkout <tag>
-cd .. && git add go-plugin && git commit -m "chore: pin go-plugin to <tag>"
+pnpm install
 ```
 
+### Build and test
 
-## Troubleshooting
+```bash
+pnpm build   # builds all workspaces
+pnpm test    # runs workspace tests
+```
 
-- "The server does not implement /plugin.GRPCStdio/StreamStdio": Ensure you built the library and that the submodule is present; the internal services are registered on startup.
-- EOF/GOAWAY on shutdown: Normal; the host closes the transport after completing the request.
-- Unix sockets: set `networkType: "unix"` and pass a socket path as `address`. The library will advertise `unix:<path>` in the handshake.
+### Run the KV example end-to-end
 
+1. Build the TypeScript library and example code
 
-## License
+```bash
+pnpm --filter ts-cli-plugin build
+pnpm --filter @examples/kv build
+```
 
-This package is not yet licensed
+2. Build the Go host (from the upstream example)
 
+```bash
+cd go-plugin/examples/grpc
+go build -o kv
+cd -
+```
+
+3. Launch the Go host, pointing it at the Node plugin via the CLI wrapper
+
+```bash
+export KV_PLUGIN="node $(pwd)/ts-cli-plugin/bin/ts-cli-plugin \
+  --module $(pwd)/examples/kv/src/register.ts \
+  --address 127.0.0.1 \
+  --app-proto-version 1"
+
+./go-plugin/examples/grpc/kv put hello world
+./go-plugin/examples/grpc/kv get hello
+# -> prints: world
+```
+
+### How hosts locate and launch plugins
+
+- Hosts decide how to obtain the plugin command to execute (binary or shell command). The mechanism is host-defined and not part of this library.
+- The upstream Go KV example uses an environment variable and shells it:
+
+```go
+// go-plugin/examples/grpc/main.go
+Cmd: exec.Command("sh", "-c", os.Getenv("KV_PLUGIN")),
+```
+
+- Other hosts may use a different env var name, a config file, or CLI flags. In this repo, `KV_PLUGIN` is specific to the KV example; adapt the name/mechanism to your host.
+
+### Notes:
+
+- The library automatically registers the gRPC Health service (service name "plugin") and the internal `plugin.GRPCStdio` and `plugin.GRPCController` services expected by the host.
+- The handshake line printed to stdout follows the upstream format `CORE|APP|NETWORK|ADDR|grpc`.
+
+### Repository structure
+
+```
+ts-cli-grpc-plugin/
+  README.md                 # this file (monorepo overview)
+  ts-cli-plugin/            # TypeScript library and CLI wrapper
+  examples/                 # example plugins (see README inside)
+  go-plugin/                # upstream submodule (HashiCorp go-plugin)
+```
+
+### More docs
+
+- TypeScript library: `ts-cli-plugin/README.md`
+- Examples: `examples/README.md`
+- Upstream background and architecture: [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin)

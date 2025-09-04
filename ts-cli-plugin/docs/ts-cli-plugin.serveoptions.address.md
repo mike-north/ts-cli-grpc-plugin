@@ -4,7 +4,7 @@
 
 ## ServeOptions.address property
 
-Address to bind. For tcp, e.g. 127.0.0.1:0 (ephemeral). For unix, a socket path.
+Address to bind. - For "tcp", use `host:port` (e.g. `127.0.0.1:0` to select an ephemeral port) - For "unix", provide the socket path (e.g. `/tmp/my.sock`<!-- -->)
 
 **Signature:**
 

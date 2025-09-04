@@ -8,36 +8,35 @@
     "ts-cli-plugin": "bin/ts-cli-plugin"
   },
   "scripts": {
-    "clean": "rimraf dist docs",
+    "clean": "rimraf dist docs temp/combined temp/@grpc/grpc-js.api.json",
     "copy-assets": "cp -R src/protos dist/protos 2>/dev/null || true",
-    "build": "pnpm compile:ts && pnpm api:extract && pnpm compile:docs",
+    "build": "pnpm compile:ts && pnpm api:extract && pnpm api:extract:deps && pnpm compile:docs",
     "compile:ts": "tsc -P tsconfig.build.json && pnpm run copy-assets",
     "rebuild": "pnpm clean && pnpm build && pnpm build",
     "prepare": "pnpm build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "api:extract": "api-extractor run --local",
-    "compile:docs": "api-documenter markdown --input ./temp --output ./docs"
+    "api:extract:deps": "api-extractor run --local --config ./scripts/api-extractor/grpc-js.json && node ./scripts/rename-grpc-json.js && mkdir -p temp/combined && cp -f temp/ts-cli-plugin.api.json temp/combined/ && cp -f temp/@grpc/grpc-js.api.json temp/combined/",
+    "compile:docs": "api-documenter markdown --input ./temp/combined --output ./docs"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "packageManager": "pnpm@10.15.0",
   "devDependencies": {
-    "@eslint/js": "^9.34.0",
     "@microsoft/api-documenter": "^7.26.32",
     "@microsoft/api-extractor": "^7.52.11",
     "@types/node": "^24.3.0",
-    "eslint": "^9.34.0",
-    "jiti": "^2.5.1",
     "rimraf": "^6.0.1",
     "typescript": "5.8.2",
-    "typescript-eslint": "^8.42.0",
     "vitest": "^3.2.4"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.13.4",
     "@grpc/proto-loader": "^0.8.0",
-    "google-proto-files": "5.0.1"
+    "google-proto-files": "5.0.1",
+    "jiti": "^2.5.1"
   }
 }

@@ -4,12 +4,33 @@
 
 ## ServeOptions interface
 
-Options for serving the plugin.
+Options for [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
 export interface ServeOptions 
+```
+
+## Remarks
+
+- When [ServeOptions.networkType](./ts-cli-plugin.serveoptions.networktype.md) is "tcp" and the `address` omits a port, an ephemeral port is chosen automatically. - When [ServeOptions.networkType](./ts-cli-plugin.serveoptions.networktype.md) is "unix", the address is treated as a filesystem path and will be prefixed with `unix:` for gRPC if not already present.
+
+## Example
+
+Using an ephemeral TCP port and registering your own service:
+
+```ts
+import * as grpc from "@grpc/grpc-js";
+import { servePlugin } from "ts-cli-plugin";
+
+await servePlugin({
+  appProtocolVersion: 1,
+  address: "127.0.0.1:0",
+  register(server: grpc.Server) {
+    server.addService(MyServiceDefinition, myHandlers)
+  },
+});
 ```
 
 ## Properties
@@ -50,7 +71,7 @@ string
 
 </td><td>
 
-Address to bind. For tcp, e.g. 127.0.0.1:0 (ephemeral). For unix, a socket path.
+Address to bind. - For "tcp", use `host:port` (e.g. `127.0.0.1:0` to select an ephemeral port) - For "unix", provide the socket path (e.g. `/tmp/my.sock`<!-- -->)
 
 
 </td></tr>
@@ -69,7 +90,7 @@ number
 
 </td><td>
 
-Application protocol version determined by the host app.
+Application protocol version expected by the host application.
 
 
 </td></tr>
@@ -88,7 +109,7 @@ Application protocol version determined by the host app.
 
 </td><td>
 
-_(Optional)_ Network type for the gRPC server.
+_(Optional)_ Network type for the gRPC server. Defaults to "tcp".
 
 
 </td></tr>
@@ -107,7 +128,7 @@ _(Optional)_ Network type for the gRPC server.
 
 </td><td>
 
-_(Optional)_ Optional callback to register your service(s) on the server.
+_(Optional)_ Optional callback to register your gRPC service definition(s) on the server.
 
 
 </td></tr>

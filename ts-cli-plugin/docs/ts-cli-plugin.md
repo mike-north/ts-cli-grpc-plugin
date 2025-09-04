@@ -4,9 +4,13 @@
 
 ## ts-cli-plugin package
 
-TypeScript library for writing CLI plugins compatible with HashiCorp's go-plugin (gRPC protocol). It boots a gRPC server that:
+TypeScript library for writing CLI plugins compatible with HashiCorp's go-plugin (gRPC protocol).
 
-- Registers the gRPC Health service and reports SERVING for service "plugin" - Prints the expected handshake line to stdout: `CORE|APP|NETWORK|ADDR|grpc` - Implements the internal `GRPCStdio` and `GRPCController` services expected by the go-plugin host
+This package exposes small, focused primitives to help you bring up a gRPC server that can speak to a go-plugin host:
+
+- Registers the gRPC Health service and reports SERVING for service "plugin" so the host can probe readiness - Emits the expected handshake line on stdout in the form `CORE|APP|NETWORK|ADDR|grpc` so the host can connect - Optionally wires up the internal `GRPCStdio` and `GRPCController` services when the corresponding protos are present - Lets you register your own gRPC services via a simple callback
+
+The most common entry point is [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->, which binds a local server and writes the handshake line that the host process consumes on stdout. For convenience, [formatHandshake()](./ts-cli-plugin.formathandshake.md) is also exported if you need to compute the handshake string manually.
 
 ## Functions
 
@@ -23,12 +27,48 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[createRegistrar(register)](./ts-cli-plugin.createregistrar.md)
+
+
+</td><td>
+
+Wrap a register function for convenience.
+
+
+</td></tr>
+<tr><td>
+
 [formatHandshake(coreProtocolVersion, appProtocolVersion, networkType, address, protocol)](./ts-cli-plugin.formathandshake.md)
 
 
 </td><td>
 
-Formats the handshake string for the plugin.
+Formats the handshake line that the go-plugin host expects on stdout.
+
+The format is: `CORE|APP|NETWORK|ADDR|PROTOCOL` (example: `1|1|tcp|127.0.0.1:12345|grpc`<!-- -->).
+
+
+</td></tr>
+<tr><td>
+
+[loadProtos(opts)](./ts-cli-plugin.loadprotos.md)
+
+
+</td><td>
+
+Load protobuf files using proto-loader and return a gRPC package definition object.
+
+When an assertion function is provided, the loaded value is validated and returned as type `T`<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[loadProtos(opts, assert)](./ts-cli-plugin.loadprotos_1.md)
+
+
+</td><td>
+
 
 
 </td></tr>
@@ -39,7 +79,9 @@ Formats the handshake string for the plugin.
 
 </td><td>
 
-Serves the plugin.
+Starts a gRPC server suitable for a go-plugin host and writes the handshake line to stdout.
+
+This function: - Registers a minimal gRPC Health service and reports `SERVING` for service "plugin" - Optionally registers the internal `GRPCStdio` and `GRPCController` services if the corresponding protos are available (when the `go-plugin` submodule exists) - Invokes your [register](./ts-cli-plugin.serveoptions.register.md) callback so you can add your own services - Binds the server to the requested address (choosing an ephemeral port for TCP if none supplied) - Emits a single handshake line to stdout using [formatHandshake()](./ts-cli-plugin.formathandshake.md)
 
 
 </td></tr>
@@ -60,12 +102,23 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[LoadProtosOptions](./ts-cli-plugin.loadprotosoptions.md)
+
+
+</td><td>
+
+Options for loading protobuf files.
+
+
+</td></tr>
+<tr><td>
+
 [ServeOptions](./ts-cli-plugin.serveoptions.md)
 
 
 </td><td>
 
-Options for serving the plugin.
+Options for [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->.
 
 
 </td></tr>
@@ -91,7 +144,20 @@ Description
 
 </td><td>
 
-Network type for the gRPC server.
+Union of supported network types for the gRPC server.
+
+- "tcp": bind to a host:port (e.g. `127.0.0.1:0` for an ephemeral port) - "unix": bind to a filesystem UNIX domain socket path
+
+
+</td></tr>
+<tr><td>
+
+[RegisterFn](./ts-cli-plugin.registerfn.md)
+
+
+</td><td>
+
+Function signature for registering services on a grpc.Server.
 
 
 </td></tr>

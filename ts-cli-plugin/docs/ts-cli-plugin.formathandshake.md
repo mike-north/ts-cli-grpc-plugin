@@ -4,7 +4,9 @@
 
 ## formatHandshake() function
 
-Formats the handshake string for the plugin.
+Formats the handshake line that the go-plugin host expects on stdout.
+
+The format is: `CORE|APP|NETWORK|ADDR|PROTOCOL` (example: `1|1|tcp|127.0.0.1:12345|grpc`<!-- -->).
 
 **Signature:**
 
@@ -42,7 +44,7 @@ number
 
 </td><td>
 
-The core protocol version.
+The core protocol version (typically `1`<!-- -->).
 
 
 </td></tr>
@@ -58,7 +60,7 @@ number
 
 </td><td>
 
-The app protocol version.
+The application protocol version that your plugin implements.
 
 
 </td></tr>
@@ -74,7 +76,7 @@ networkType
 
 </td><td>
 
-The network type.
+The network type to advertise to the host.
 
 
 </td></tr>
@@ -90,7 +92,7 @@ string
 
 </td><td>
 
-The address to bind.
+The advertised address. For "tcp" this is `host:port`<!-- -->. For "unix" this is a path.
 
 
 </td></tr>
@@ -106,7 +108,7 @@ protocol
 
 </td><td>
 
-_(Optional)_ The protocol to use.
+_(Optional)_ The transport protocol identifier. Defaults to `"grpc"`<!-- -->.
 
 
 </td></tr>
@@ -116,5 +118,13 @@ _(Optional)_ The protocol to use.
 
 string
 
-The handshake string.
+The handshake string that should be written to stdout.
+
+## Example
+
+
+```ts
+const line = formatHandshake(1, 1, "tcp", "127.0.0.1:34567", "grpc");
+// => "1|1|tcp|127.0.0.1:34567|grpc"
+```
 
