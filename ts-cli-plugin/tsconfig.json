@@ -1,4 +1,14 @@
 {
   "extends": "./tsconfig.build.json",
-  "include": ["src", "test"]
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true
+  },
+  "include": [
+    "src",
+    "test",
+    "eslint.config.mts",
+    "examples"
+  ],
+  "exclude": ["node_modules", "dist/**/*"]
 }

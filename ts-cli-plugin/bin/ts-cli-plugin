@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+/* eslint-disable */
+const { servePlugin } = require("../dist/index.js");
+const path = require("node:path");
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const out = { address: "127.0.0.1", networkType: "tcp", appProtocolVersion: 1, register: null, module: null };
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i];
+    if ((a === "-a" || a === "--address") && args[i+1]) { out.address = args[++i]; continue; }
+    if ((a === "-n" || a === "--network") && args[i+1]) { out.networkType = args[++i]; continue; }
+    if ((a === "-p" || a === "--app-proto-version") && args[i+1]) { out.appProtocolVersion = Number(args[++i]); continue; }
+    if ((a === "-m" || a === "--module") && args[i+1]) { out.module = args[++i]; continue; }
+  }
+  return out;
+}
+
+(async () => {
+  const opts = parseArgs();
+  if (opts.module) {
+    const modPath = path.resolve(process.cwd(), opts.module);
+    const mod = require(modPath);
+    const register = mod.register || mod.default || mod;
+    if (typeof register === "function") {
+      opts.register = register;
+    }
+  }
+  await servePlugin(opts);
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
+
+

@@ -1,3 +1,4 @@
 [submodule "go-plugin"]
 	path = go-plugin
 	url = https://github.com/hashicorp/go-plugin.git
+	branch = v1.7.0
