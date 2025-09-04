@@ -179,6 +179,5 @@ cd .. && git add go-plugin && git commit -m "chore: pin go-plugin to <tag>"
 
 ## License
 
-This package is licensed under ISC. The `go-plugin` submodule is licensed under MPL-2.0 (see its LICENSE).
-
+This package is not yet licensed
 
