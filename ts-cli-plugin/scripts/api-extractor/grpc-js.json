@@ -1,10 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
-  "projectFolder": "/Users/mnorth/Development/ts-cli-grpc-plugin/node_modules/.pnpm/@grpc+grpc-js@1.13.4/node_modules/@grpc/grpc-js",
+  "projectFolder": "../../node_modules/@grpc/grpc-js",
   "mainEntryPointFilePath": "<projectFolder>/build/src/index.d.ts",
   "docModel": {
     "enabled": true,
-    "apiJsonFilePath": "/Users/mnorth/Development/ts-cli-grpc-plugin/ts-cli-plugin/temp/@grpc/grpc-js.api.json"
+    "apiJsonFilePath": "../temp/@grpc/grpc-js.api.json"
   },
   "compiler": {
     "overrideTsconfig": {
@@ -13,7 +13,7 @@
         "strict": false
       },
       "files": [
-        "/Users/mnorth/Development/ts-cli-grpc-plugin/node_modules/.pnpm/@grpc+grpc-js@1.13.4/node_modules/@grpc/grpc-js/build/src/index.d.ts"
+        "<projectFolder>/build/src/index.d.ts"
       ]
     }
   },
