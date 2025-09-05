@@ -18,28 +18,23 @@ The most common entry point is [servePlugin()](./ts-cli-plugin.serveplugin.md)<!
 
 Function
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [createRegistrar(register)](./ts-cli-plugin.createregistrar.md)
 
-
 </td><td>
 
 Wrap a register function for convenience.
-
 
 </td></tr>
 <tr><td>
 
 [formatHandshake(coreProtocolVersion, appProtocolVersion, networkType, address, protocol)](./ts-cli-plugin.formathandshake.md)
-
 
 </td><td>
 
@@ -47,12 +42,10 @@ Formats the handshake line that the go-plugin host expects on stdout.
 
 The format is: `CORE|APP|NETWORK|ADDR|PROTOCOL` (example: `1|1|tcp|127.0.0.1:12345|grpc`<!-- -->).
 
-
 </td></tr>
 <tr><td>
 
 [loadProtos(opts)](./ts-cli-plugin.loadprotos.md)
-
 
 </td><td>
 
@@ -60,29 +53,23 @@ Load protobuf files using proto-loader and return a gRPC package definition obje
 
 When an assertion function is provided, the loaded value is validated and returned as type `T`<!-- -->.
 
-
 </td></tr>
 <tr><td>
 
 [loadProtos(opts, assert)](./ts-cli-plugin.loadprotos_1.md)
 
-
 </td><td>
-
-
 
 </td></tr>
 <tr><td>
 
 [servePlugin(options)](./ts-cli-plugin.serveplugin.md)
 
-
 </td><td>
 
 Starts a gRPC server suitable for a go-plugin host and writes the handshake line to stdout.
 
 This function: - Registers a minimal gRPC Health service and reports `SERVING` for service "plugin" - Optionally registers the internal `GRPCStdio` and `GRPCController` services if the corresponding protos are available (when the `go-plugin` submodule exists) - Invokes your [register](./ts-cli-plugin.serveoptions.register.md) callback so you can add your own services - Binds the server to the requested address (choosing an ephemeral port for TCP if none supplied) - Emits a single handshake line to stdout using [formatHandshake()](./ts-cli-plugin.formathandshake.md)
-
 
 </td></tr>
 </tbody></table>
@@ -93,33 +80,27 @@ This function: - Registers a minimal gRPC Health service and reports `SERVING` f
 
 Interface
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [LoadProtosOptions](./ts-cli-plugin.loadprotosoptions.md)
 
-
 </td><td>
 
 Options for loading protobuf files.
-
 
 </td></tr>
 <tr><td>
 
 [ServeOptions](./ts-cli-plugin.serveoptions.md)
 
-
 </td><td>
 
 Options for [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->.
-
 
 </td></tr>
 </tbody></table>
@@ -130,17 +111,14 @@ Options for [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->.
 
 Type Alias
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [NetworkType](./ts-cli-plugin.networktype.md)
-
 
 </td><td>
 
@@ -148,18 +126,14 @@ Union of supported network types for the gRPC server.
 
 - "tcp": bind to a host:port (e.g. `127.0.0.1:0` for an ephemeral port) - "unix": bind to a filesystem UNIX domain socket path
 
-
 </td></tr>
 <tr><td>
 
 [RegisterFn](./ts-cli-plugin.registerfn.md)
 
-
 </td><td>
 
 Function signature for registering services on a grpc.Server.
 
-
 </td></tr>
 </tbody></table>
-

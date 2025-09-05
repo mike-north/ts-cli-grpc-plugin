@@ -14,10 +14,19 @@ export default defineConfig(
     },
   },
   {
-    ignores: ["**/dist/**/*"],
+    ignores: [
+      "**/dist/**/*",
+      "ts-cli-plugin/bin/**",
+      "ts-cli-plugin/scripts/**",
+    ],
   },
   {
-    files: ["src/**/*.ts", "test/**/*.ts", "examples/**/*.ts", "ts-cli-plugin/bin/ts-cli-plugin"],
-    rules: {},
+    files: ["**/src/**/*.ts", "**/test/**/*.ts", "examples/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
   },
 );

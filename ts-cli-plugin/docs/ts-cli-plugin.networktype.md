@@ -11,5 +11,5 @@ Union of supported network types for the gRPC server.
 **Signature:**
 
 ```typescript
-export type NetworkType = "tcp" | "unix";
+export type NetworkType = 'tcp' | 'unix'
 ```

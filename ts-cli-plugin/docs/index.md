@@ -10,26 +10,21 @@
 
 Package
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [@grpc/grpc-js](./grpc-js.md)
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 [ts-cli-plugin](./ts-cli-plugin.md)
-
 
 </td><td>
 
@@ -41,7 +36,5 @@ This package exposes small, focused primitives to help you bring up a gRPC serve
 
 The most common entry point is [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->, which binds a local server and writes the handshake line that the host process consumes on stdout. For convenience, [formatHandshake()](./ts-cli-plugin.formathandshake.md) is also exported if you need to compute the handshake string manually.
 
-
 </td></tr>
 </tbody></table>
-

@@ -18,32 +18,26 @@ closeClient: (client: Client) => void
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 client
 
-
 </td><td>
 
 Client
 
-
 </td><td>
 
 The client to close.
-
 
 </td></tr>
 </tbody></table>
@@ -51,4 +45,3 @@ The client to close.
 **Returns:**
 
 void
-

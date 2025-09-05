@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2024",
-    "module": "CommonJS",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

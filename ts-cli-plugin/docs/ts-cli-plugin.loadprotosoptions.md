@@ -9,7 +9,7 @@ Options for loading protobuf files.
 **Signature:**
 
 ```typescript
-export interface LoadProtosOptions 
+export interface LoadProtosOptions
 ```
 
 ## Properties
@@ -18,58 +18,45 @@ export interface LoadProtosOptions
 
 Property
 
-
 </th><th>
 
 Modifiers
-
 
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [files](./ts-cli-plugin.loadprotosoptions.files.md)
 
-
 </td><td>
-
 
 </td><td>
 
 string\[\]
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 [includeDirs?](./ts-cli-plugin.loadprotosoptions.includedirs.md)
 
-
 </td><td>
-
 
 </td><td>
 
 string\[\]
 
-
 </td><td>
 
 _(Optional)_
 
-
 </td></tr>
 </tbody></table>
-

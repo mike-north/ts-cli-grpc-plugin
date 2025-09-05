@@ -16,58 +16,46 @@ waitForClientReady: (client: Client, deadline: Date | number, callback: (error?:
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 client
 
-
 </td><td>
 
 Client
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 deadline
 
-
 </td><td>
 
 Date \| number
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 callback
 
-
 </td><td>
 
 (error?: Error) =&gt; void
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -75,4 +63,3 @@ callback
 **Returns:**
 
 void
-

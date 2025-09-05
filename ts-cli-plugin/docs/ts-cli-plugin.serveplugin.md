@@ -12,9 +12,9 @@ This function: - Registers a minimal gRPC Health service and reports `SERVING` f
 
 ```typescript
 export declare function servePlugin(options: ServeOptions): Promise<{
-    server: grpc.Server;
-    address: string;
-}>;
+  server: grpc.Server
+  address: string
+}>
 ```
 
 ## Parameters
@@ -23,32 +23,26 @@ export declare function servePlugin(options: ServeOptions): Promise<{
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 options
 
-
 </td><td>
 
 [ServeOptions](./ts-cli-plugin.serveoptions.md)
 
-
 </td><td>
 
 Server configuration and (optional) service registration callback.
-
 
 </td></tr>
 </tbody></table>
@@ -72,16 +66,15 @@ If the server fails to bind to the requested address.
 Start a server on an ephemeral port and register your own service(s):
 
 ```ts
-import * as grpc from "@grpc/grpc-js";
-import { servePlugin } from "ts-cli-plugin";
+import * as grpc from '@grpc/grpc-js'
+import { servePlugin } from 'ts-cli-plugin'
 
 const { server, address } = await servePlugin({
   appProtocolVersion: 1,
-  address: "127.0.0.1:0",
+  address: '127.0.0.1:0',
   register(s: grpc.Server) {
     s.addService(MyServiceDefinition, handlers)
   },
-});
-console.log("listening on", address);
+})
+console.log('listening on', address)
 ```
-

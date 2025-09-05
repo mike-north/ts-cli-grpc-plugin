@@ -18,44 +18,35 @@ loadObject: (value: any, options: any) => never
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 value
 
-
 </td><td>
 
 any
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 options
 
-
 </td><td>
 
 any
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -63,4 +54,3 @@ any
 **Returns:**
 
 never
-

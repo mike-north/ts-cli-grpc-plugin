@@ -7,5 +7,9 @@
 **Signature:**
 
 ```typescript
-export type Call = ClientUnaryCall | ClientReadableStream<any> | ClientWritableStream<any> | ClientDuplexStream<any, any>;
+export type Call =
+  | ClientUnaryCall
+  | ClientReadableStream<any>
+  | ClientWritableStream<any>
+  | ClientDuplexStream<any, any>
 ```

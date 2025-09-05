@@ -3,6 +3,7 @@ import type { KnipConfig } from "knip";
 const cfg: KnipConfig = {
   workspaces: {
     "ts-cli-plugin": {
+      ignoreDependencies: ["rollup"],
       entry: ["src/index.ts", "./bin/ts-cli-plugin"],
     },
     "examples/kv": {

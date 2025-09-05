@@ -26,19 +26,19 @@ You can consume the library via source in this monorepo, or publish it and insta
 Implement your service, then call `servePlugin` and pass a `register(server)` callback that registers your gRPC service(s).
 
 ```ts
-import { servePlugin } from "ts-cli-plugin";
-import * as grpc from "@grpc/grpc-js";
-import * as protoLoader from "@grpc/proto-loader";
+import { servePlugin } from 'ts-cli-plugin'
+import * as grpc from '@grpc/grpc-js'
+import * as protoLoader from '@grpc/proto-loader'
 
 // Load your service definition (example)
-const def = protoLoader.loadSync(["./proto/kv.proto"], {
+const def = protoLoader.loadSync(['./proto/kv.proto'], {
   keepCase: true,
   longs: String,
   enums: String,
   defaults: true,
   oneofs: true,
-});
-const { proto } = grpc.loadPackageDefinition(def) as any;
+})
+const { proto } = grpc.loadPackageDefinition(def) as any
 
 const kvImpl = {
   async get(call: any, cb: any) {
@@ -47,16 +47,16 @@ const kvImpl = {
   async put(call: any, cb: any) {
     /* ... */
   },
-};
+}
 
 servePlugin({
   appProtocolVersion: 1,
-  address: "127.0.0.1", // host will connect to 127.0.0.1:<ephemeral>
-  networkType: "tcp",
+  address: '127.0.0.1', // host will connect to 127.0.0.1:<ephemeral>
+  networkType: 'tcp',
   register(server) {
-    server.addService(proto.KV.service, kvImpl);
+    server.addService(proto.KV.service, kvImpl)
   },
-});
+})
 ```
 
 The process will print one line like `1|1|tcp|127.0.0.1:12345|grpc` and keep serving until the host requests shutdown.
@@ -116,13 +116,13 @@ Seeing EOF/GOAWAY messages in plugin logs during shutdown is expected; the host 
 Boots the plugin gRPC server and prints the handshake line.
 
 ```ts
-type NetworkType = "tcp" | "unix";
+type NetworkType = 'tcp' | 'unix'
 
 interface ServeOptions {
-  appProtocolVersion: number; // host-defined application version
-  address: string; // e.g. "127.0.0.1" (ephemeral port auto-assigned) or unix socket path
-  networkType?: NetworkType; // default "tcp"
-  register?: (server: grpc.Server) => void; // register your gRPC services
+  appProtocolVersion: number // host-defined application version
+  address: string // e.g. "127.0.0.1" (ephemeral port auto-assigned) or unix socket path
+  networkType?: NetworkType // default "tcp"
+  register?: (server: grpc.Server) => void // register your gRPC services
 }
 ```
 
@@ -139,12 +139,12 @@ Returns a string in the format required by go-plugin, e.g. `1|1|tcp|127.0.0.1:12
 ### Helpers
 
 ```ts
-import { loadProtos, createRegistrar } from "ts-cli-plugin/dist/helpers";
+import { loadProtos, createRegistrar } from 'ts-cli-plugin/dist/helpers'
 
-const pkgs = loadProtos({ files: ["./proto/kv.proto"] });
-const register = createRegistrar((server) => {
-  server.addService(pkgs.proto.KV.service, kvImpl);
-});
+const pkgs = loadProtos({ files: ['./proto/kv.proto'] })
+const register = createRegistrar(server => {
+  server.addService(pkgs.proto.KV.service, kvImpl)
+})
 ```
 
 ## Internal plugin services

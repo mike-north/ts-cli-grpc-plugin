@@ -16,30 +16,24 @@ getClientChannel: (client: Client) => Channel
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 client
 
-
 </td><td>
 
 Client
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -47,4 +41,3 @@ Client
 **Returns:**
 
 Channel
-

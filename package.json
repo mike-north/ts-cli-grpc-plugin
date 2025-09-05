@@ -1,37 +1,41 @@
 {
   "name": "ts-cli-grpc-plugin-workspace",
-  "private": true,
   "version": "0.0.1",
-  "workspaces": [
-    "ts-cli-plugin",
-    "examples/*"
-  ],
-  "packageManager": "pnpm@10.15.0",
-  "scripts": {
-    "clean": "lerna run clean",
-    "cleanbuild": "lerna run clean && lerna run build",
-    "knip": "knip",
-    "knip:fix": "knip --fix",
-    "lint": "lerna run lint",
-    "format": "pnpm format:prettier && pnpm format:knip",
-    "format:knip": "knip --format",
-    "format:prettier": "prettier --write .",
-    "fix": "lerna run fix",
-    "build": "lerna run build",
-    "test": "lerna run test"
-  },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@types/node": "^24.3.1",
+    "eslint": "^9.34.0",
     "jiti": "^2.5.1",
     "knip": "^5.63.1",
     "lerna": "^8.2.3",
-    "eslint": "^9.34.0",
     "prettier": "^3.6.2",
+    "syncpack": "14.0.0-alpha.19",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.42.0"
   },
+  "packageManager": "pnpm@10.15.0",
+  "private": true,
+  "scripts": {
+    "build": "lerna run build",
+    "clean": "lerna run clean",
+    "cleanbuild": "lerna run clean && lerna run build",
+    "fix": "lerna run fix && pnpm syncpack:fix",
+    "format": "pnpm format:prettier && pnpm format:knip && pnpm format:syncpack",
+    "format:knip": "knip --format",
+    "format:prettier": "prettier --write .",
+    "format:syncpack": "syncpack format",
+    "knip": "knip",
+    "knip:fix": "knip --fix",
+    "lint": "lerna run lint,typecheck",
+    "syncpack:fix": "syncpack fix",
+    "syncpack:lint": "syncpack lint",
+    "test": "lerna run test"
+  },
   "volta": {
     "node": "22.19.0"
-  }
+  },
+  "workspaces": [
+    "ts-cli-plugin",
+    "examples/*"
+  ]
 }

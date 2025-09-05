@@ -10,78 +10,62 @@
 
 Function
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [closeClient(client)](./grpc-js.closeclient.md)
 
-
 </td><td>
 
 Close a Client object.
-
 
 </td></tr>
 <tr><td>
 
 [getClientChannel(client)](./grpc-js.getclientchannel.md)
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 [load(filename, format, options)](./grpc-js.load.md)
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 [loadObject(value, options)](./grpc-js.loadobject.md)
 
-
 </td><td>
 
 \*\* Unimplemented function stubs \*\*\*
-
 
 </td></tr>
 <tr><td>
 
 [setLogger(logger)](./grpc-js.setlogger.md)
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 [setLogVerbosity(verbosity)](./grpc-js.setlogverbosity.md)
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 [waitForClientReady(client, deadline, callback)](./grpc-js.waitforclientready.md)
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -92,22 +76,18 @@ Close a Client object.
 
 Variable
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [credentials](./grpc-js.credentials.md)
 
-
 </td><td>
 
 \*\* Client Credentials \*\*\*
-
 
 </td></tr>
 </tbody></table>
@@ -118,21 +98,16 @@ Description
 
 Type Alias
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 [Call](./grpc-js.call.md)
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
-

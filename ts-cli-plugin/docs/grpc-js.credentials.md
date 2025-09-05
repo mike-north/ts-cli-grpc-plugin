@@ -10,13 +10,17 @@
 
 ```typescript
 credentials: {
-    combineChannelCredentials: (channelCredentials: ChannelCredentials, ...callCredentials: CallCredentials[]) => ChannelCredentials;
-    combineCallCredentials: (first: CallCredentials, ...additional: CallCredentials[]) => CallCredentials;
-    createInsecure: typeof ChannelCredentials.createInsecure;
-    createSsl: typeof ChannelCredentials.createSsl;
-    createFromSecureContext: typeof ChannelCredentials.createFromSecureContext;
-    createFromMetadataGenerator: typeof CallCredentials.createFromMetadataGenerator;
-    createFromGoogleCredential: typeof CallCredentials.createFromGoogleCredential;
-    createEmpty: typeof CallCredentials.createEmpty;
+  combineChannelCredentials: (
+    channelCredentials: ChannelCredentials,
+    ...callCredentials: CallCredentials[]
+  ) => ChannelCredentials
+  combineCallCredentials: (first: CallCredentials, ...additional: CallCredentials[]) =>
+    CallCredentials
+  createInsecure: typeof ChannelCredentials.createInsecure
+  createSsl: typeof ChannelCredentials.createSsl
+  createFromSecureContext: typeof ChannelCredentials.createFromSecureContext
+  createFromMetadataGenerator: typeof CallCredentials.createFromMetadataGenerator
+  createFromGoogleCredential: typeof CallCredentials.createFromGoogleCredential
+  createEmpty: typeof CallCredentials.createEmpty
 }
 ```

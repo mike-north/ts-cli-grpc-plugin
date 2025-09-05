@@ -1,8 +1,11 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "rootDir": "."
   },
+  "exclude": ["node_modules", "dist"],
   "include": ["src", "test", "bin/ts-cli-plugin"]
 }

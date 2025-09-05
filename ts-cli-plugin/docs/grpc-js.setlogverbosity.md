@@ -16,30 +16,24 @@ setLogVerbosity: (verbosity: LogVerbosity) => void
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 verbosity
 
-
 </td><td>
 
 LogVerbosity
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -47,4 +41,3 @@ LogVerbosity
 **Returns:**
 
 void
-

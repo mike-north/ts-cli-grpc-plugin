@@ -9,5 +9,5 @@ Function signature for registering services on a grpc.Server.
 **Signature:**
 
 ```typescript
-export type RegisterFn = (server: grpc.Server) => void;
+export type RegisterFn = (server: grpc.Server) => void
 ```

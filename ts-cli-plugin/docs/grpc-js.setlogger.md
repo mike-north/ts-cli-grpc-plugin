@@ -16,30 +16,24 @@ setLogger: (logger: Partial<Console>) => void
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 logger
 
-
 </td><td>
 
 Partial&lt;Console&gt;
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -47,4 +41,3 @@ Partial&lt;Console&gt;
 **Returns:**
 
 void
-

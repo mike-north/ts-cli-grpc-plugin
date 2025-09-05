@@ -4,11 +4,13 @@
 
 ## loadProtos() function
 
-
 **Signature:**
 
 ```typescript
-export declare function loadProtos<T>(opts: LoadProtosOptions, assert: (value: unknown) => value is T): T;
+export declare function loadProtos<T>(
+  opts: LoadProtosOptions,
+  assert: (value: unknown) => value is T,
+): T
 ```
 
 ## Parameters
@@ -17,44 +19,35 @@ export declare function loadProtos<T>(opts: LoadProtosOptions, assert: (value: u
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 opts
 
-
 </td><td>
 
 [LoadProtosOptions](./ts-cli-plugin.loadprotosoptions.md)
 
-
 </td><td>
-
 
 </td></tr>
 <tr><td>
 
 assert
 
-
 </td><td>
 
 (value: unknown) =&gt; value is T
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -62,4 +55,3 @@ assert
 **Returns:**
 
 T
-

@@ -22,9 +22,9 @@
  * - Prints a single handshake line to stdout after the server starts, which the host process consumes.
  * - Exits with code 1 and prints the error if startup fails.
  */
-const { servePlugin } = require("../dist/index.js");
-const path = require("node:path");
-const createJiti = require("jiti");
+const { servePlugin } = require('../dist/index.js')
+const path = require('node:path')
+const createJiti = require('jiti')
 
 /**
  * Parse CLI arguments into options compatible with `servePlugin`.
@@ -49,60 +49,58 @@ const createJiti = require("jiti");
  * }}
  */
 function parseArgs() {
-  const args = process.argv.slice(2);
+  const args = process.argv.slice(2)
   const out = {
-    address: "127.0.0.1",
-    networkType: "tcp",
+    address: '127.0.0.1',
+    networkType: 'tcp',
     appProtocolVersion: 1,
     register: null,
     module: null,
-  };
+  }
   for (let i = 0; i < args.length; i++) {
-    const a = args[i];
-    if ((a === "-a" || a === "--address") && args[i + 1]) {
-      out.address = args[++i];
-      continue;
+    const a = args[i]
+    if ((a === '-a' || a === '--address') && args[i + 1]) {
+      out.address = args[++i]
+      continue
     }
-    if ((a === "-n" || a === "--network") && args[i + 1]) {
-      out.networkType = args[++i];
-      continue;
+    if ((a === '-n' || a === '--network') && args[i + 1]) {
+      out.networkType = args[++i]
+      continue
     }
-    if ((a === "-p" || a === "--app-proto-version") && args[i + 1]) {
-      out.appProtocolVersion = Number(args[++i]);
-      continue;
+    if ((a === '-p' || a === '--app-proto-version') && args[i + 1]) {
+      out.appProtocolVersion = Number(args[++i])
+      continue
     }
-    if ((a === "-m" || a === "--module") && args[i + 1]) {
-      out.module = args[++i];
-      continue;
+    if ((a === '-m' || a === '--module') && args[i + 1]) {
+      out.module = args[++i]
+      continue
     }
   }
-  return out;
+  return out
 }
 
-(async () => {
+;(async () => {
   /**
    * Compute options from CLI and, if provided, load a user module that exports
    * a `register(server)` function to attach gRPC services. When the module has a
    * TypeScript extension (.ts/.mts/.cts) it is loaded via jiti to support ESM/TS
    * without a build step; otherwise Node's `require` is used.
    */
-  const opts = parseArgs();
+  const opts = parseArgs()
   if (opts.module) {
-    const modPath = path.resolve(process.cwd(), opts.module);
+    const modPath = path.resolve(process.cwd(), opts.module)
     const jiti = createJiti(__filename, {
       interopDefault: true,
       esmResolve: true,
-    });
-    const mod = /\.(ts|mts|cts)$/i.test(modPath)
-      ? jiti(modPath)
-      : require(modPath);
-    const register = mod.register || mod.default || mod;
-    if (typeof register === "function") {
-      opts.register = register;
+    })
+    const mod = /\.(ts|mts|cts)$/i.test(modPath) ? jiti(modPath) : require(modPath)
+    const register = mod.register || mod.default || mod
+    if (typeof register === 'function') {
+      opts.register = register
     }
   }
-  await servePlugin(opts);
-})().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+  await servePlugin(opts)
+})().catch(err => {
+  console.error(err)
+  process.exit(1)
+})

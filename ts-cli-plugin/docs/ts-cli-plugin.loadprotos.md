@@ -11,7 +11,7 @@ When an assertion function is provided, the loaded value is validated and return
 **Signature:**
 
 ```typescript
-export declare function loadProtos(opts: LoadProtosOptions): unknown;
+export declare function loadProtos(opts: LoadProtosOptions): unknown
 ```
 
 ## Parameters
@@ -20,30 +20,24 @@ export declare function loadProtos(opts: LoadProtosOptions): unknown;
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 opts
 
-
 </td><td>
 
 [LoadProtosOptions](./ts-cli-plugin.loadprotosoptions.md)
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -51,4 +45,3 @@ opts
 **Returns:**
 
 unknown
-

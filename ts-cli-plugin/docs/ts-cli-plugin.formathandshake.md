@@ -11,7 +11,13 @@ The format is: `CORE|APP|NETWORK|ADDR|PROTOCOL` (example: `1|1|tcp|127.0.0.1:123
 **Signature:**
 
 ```typescript
-export declare function formatHandshake(coreProtocolVersion: number, appProtocolVersion: number, networkType: NetworkType, address: string, protocol?: "grpc" | "netrpc"): string;
+export declare function formatHandshake(
+  coreProtocolVersion: number,
+  appProtocolVersion: number,
+  networkType: NetworkType,
+  address: string,
+  protocol?: 'grpc' | 'netrpc',
+): string
 ```
 
 ## Parameters
@@ -20,96 +26,78 @@ export declare function formatHandshake(coreProtocolVersion: number, appProtocol
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 coreProtocolVersion
 
-
 </td><td>
 
 number
 
-
 </td><td>
 
 The core protocol version (typically `1`<!-- -->).
-
 
 </td></tr>
 <tr><td>
 
 appProtocolVersion
 
-
 </td><td>
 
 number
 
-
 </td><td>
 
 The application protocol version that your plugin implements.
-
 
 </td></tr>
 <tr><td>
 
 networkType
 
-
 </td><td>
 
 [NetworkType](./ts-cli-plugin.networktype.md)
 
-
 </td><td>
 
 The network type to advertise to the host.
-
 
 </td></tr>
 <tr><td>
 
 address
 
-
 </td><td>
 
 string
 
-
 </td><td>
 
 The advertised address. For "tcp" this is `host:port`<!-- -->. For "unix" this is a path.
-
 
 </td></tr>
 <tr><td>
 
 protocol
 
-
 </td><td>
 
 "grpc" \| "netrpc"
 
-
 </td><td>
 
 _(Optional)_ The transport protocol identifier. Defaults to `"grpc"`<!-- -->.
-
 
 </td></tr>
 </tbody></table>
@@ -122,9 +110,7 @@ The handshake string that should be written to stdout.
 
 ## Example
 
-
 ```ts
-const line = formatHandshake(1, 1, "tcp", "127.0.0.1:34567", "grpc");
+const line = formatHandshake(1, 1, 'tcp', '127.0.0.1:34567', 'grpc')
 // => "1|1|tcp|127.0.0.1:34567|grpc"
 ```
-

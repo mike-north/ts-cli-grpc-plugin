@@ -9,5 +9,5 @@ Address to bind. - For "tcp", use `host:port` (e.g. `127.0.0.1:0` to select an e
 **Signature:**
 
 ```typescript
-address: string;
+address: string
 ```

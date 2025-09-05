@@ -9,7 +9,7 @@ Wrap a register function for convenience.
 **Signature:**
 
 ```typescript
-export declare function createRegistrar(register: RegisterFn): RegisterFn;
+export declare function createRegistrar(register: RegisterFn): RegisterFn
 ```
 
 ## Parameters
@@ -18,30 +18,24 @@ export declare function createRegistrar(register: RegisterFn): RegisterFn;
 
 Parameter
 
-
 </th><th>
 
 Type
 
-
 </th><th>
 
 Description
-
 
 </th></tr></thead>
 <tbody><tr><td>
 
 register
 
-
 </td><td>
 
 [RegisterFn](./ts-cli-plugin.registerfn.md)
 
-
 </td><td>
-
 
 </td></tr>
 </tbody></table>
@@ -49,4 +43,3 @@ register
 **Returns:**
 
 [RegisterFn](./ts-cli-plugin.registerfn.md)
-

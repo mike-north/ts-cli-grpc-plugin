@@ -9,5 +9,5 @@ Application protocol version expected by the host application.
 **Signature:**
 
 ```typescript
-appProtocolVersion: number;
+appProtocolVersion: number
 ```
