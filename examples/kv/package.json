@@ -28,6 +28,9 @@
   "scripts": {
     "build": "tsc -P tsconfig.json",
     "clean": "rimraf dist",
+    "fix": "pnpm fix:all",
+    "fix:all": "pnpm fix:eslint && pnpm fix:format",
+    "fix:format": "prettier --write .",
     "fix:eslint": "eslint . --fix",
     "lint": "pnpm lint:all",
     "lint:all": "pnpm lint:eslint && pnpm lint:typecheck",

@@ -34,6 +34,7 @@
     "compile:docs": "api-documenter markdown --input ./temp/combined --output ./docs && pnpm fix:format",
     "compile:ts": "tsc -P tsconfig.build.json && pnpm run copy-assets",
     "copy-assets": "cp -R src/protos dist/protos 2>/dev/null || true && pnpm fix:format",
+    "fix": "pnpm fix:all",
     "fix:all": "pnpm fix:eslint && pnpm fix:format",
     "fix:eslint": "eslint . --fix",
     "fix:format": "prettier --write .",
