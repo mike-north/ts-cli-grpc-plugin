@@ -4,7 +4,7 @@
   "mainEntryPointFilePath": "<projectFolder>/build/src/index.d.ts",
   "docModel": {
     "enabled": true,
-    "apiJsonFilePath": "../temp/@grpc/grpc-js.api.json"
+    "apiJsonFilePath": "../../temp/@grpc/grpc-js.api.json"
   },
   "compiler": {
     "overrideTsconfig": {
