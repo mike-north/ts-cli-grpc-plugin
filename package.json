@@ -36,9 +36,6 @@
     "fix:syncpack": "syncpack fix",
     "test": "lerna run test"
   },
-  "volta": {
-    "node": "22.19.0"
-  },
   "workspaces": [
     "ts-cli-plugin",
     "examples/*"

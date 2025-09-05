@@ -13,9 +13,6 @@ concurrency:
 jobs:
   build-lint-test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ts-cli-plugin
 
     steps:
       - name: Checkout
@@ -28,12 +25,20 @@ jobs:
         with:
           version: 10.15.0
 
+      - name: Resolve Node version with nodenv
+        id: nodever
+        uses: nodenv/actions/node-version@v4
+      
+      - name: Setup nodenv
+        uses: nodenv/actions/setup-nodenv@v3
+      - run: nodenv version
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ steps.nodever.outputs.node-version }}
           cache: pnpm
-          cache-dependency-path: ts-cli-plugin/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
