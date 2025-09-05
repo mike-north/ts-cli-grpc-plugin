@@ -1,7 +1,7 @@
 {
-  "name": "ts-grpc-cli-plugin",
+  "name": "ts-cli-grpc-plugin",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "Mike North",
   "bin": {
     "ts-cli-plugin": "bin/ts-cli-plugin"
@@ -30,7 +30,7 @@
     "api:extract": "api-extractor run --local",
     "api:extract:deps": "api-extractor run --local --config ./scripts/api-extractor/grpc-js.json && node ./scripts/rename-grpc-json.js && mkdir -p temp/combined && cp -f temp/ts-cli-plugin.api.json temp/combined/ && cp -f temp/@grpc/grpc-js.api.json temp/combined/",
     "build": "pnpm compile:ts && pnpm api:extract && pnpm api:extract:deps && pnpm compile:docs",
-    "clean": "rimraf dist docs temp/combined temp/@grpc/grpc-js.api.json",
+    "clean": "rimraf dist docs etc/* temp/combined temp/@grpc/grpc-js.api.json",
     "compile:docs": "api-documenter markdown --input ./temp/combined --output ./docs && pnpm fix:format",
     "compile:ts": "tsc -P tsconfig.build.json && pnpm run copy-assets",
     "copy-assets": "cp -R src/protos dist/protos 2>/dev/null || true && pnpm fix:format",
@@ -47,5 +47,5 @@
     "rebuild": "pnpm clean && pnpm build && pnpm build",
     "test": "vitest run"
   },
-  "types": "dist/ts-grpc-cli-plugin.d.ts"
+  "types": "dist/ts-cli-grpc-plugin.d.ts"
 }

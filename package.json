@@ -37,7 +37,7 @@
     "prepare": "husky"
   },
   "workspaces": [
-    "ts-cli-plugin",
+    "ts-cli-grpc-plugin",
     "examples/*"
   ]
 }

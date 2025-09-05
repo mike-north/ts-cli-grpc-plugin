@@ -53,7 +53,7 @@ importers:
       package-up:
         specifier: ^5.0.0
         version: 5.0.0
-      ts-grpc-cli-plugin:
+      ts-cli-grpc-plugin:
         specifier: workspace:*
         version: link:../../ts-cli-plugin
     devDependencies:
