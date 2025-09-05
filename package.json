@@ -10,12 +10,8 @@
     "knip": "^5.63.1",
     "lerna": "^8.2.3",
     "prettier": "^3.6.2",
-    "syncpack": "14.0.0-alpha.19",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.42.0"
-  },
-  "optionalDependencies": {
-    "syncpack": "14.0.0-alpha.19"
   },
   "packageManager": "pnpm@10.15.0",
   "private": true,
@@ -24,26 +20,21 @@
     "clean": "lerna run clean",
     "cleanbuild": "lerna run clean && lerna run build",
     "fix": "pnpm fix:all",
-    "fix:all": "pnpm fix:packages && pnpm fix:knip && pnpm fix:syncpack",
-    "fix:format": "pnpm fix:format:prettier && pnpm fix:format:syncpack",
+    "fix:all": "pnpm fix:packages && pnpm fix:knip",
+    "fix:format": "pnpm fix:format:prettier",
     "fix:format:prettier": "prettier --write .",
-    "fix:format:syncpack": "syncpack format",
     "fix:knip": "knip --fix --format",
     "fix:packages": "lerna run fix",
-    "fix:syncpack": "syncpack fix",
     "lint": "pnpm lint:all",
-    "lint:all": "pnpm lint:packages && pnpm lint:knip && pnpm lint:syncpack",
+    "lint:all": "pnpm lint:packages && pnpm lint:knip",
     "lint:knip": "knip",
     "lint:packages": "lerna run lint:all",
-    "lint:syncpack": "syncpack lint",
     "test": "lerna run test",
     "prepare": "husky"
   },
   "workspaces": [
     "ts-cli-plugin",
     "examples/*"
-  ],
-  "resolutions": {
-    "esbuild": "0.25.8"
-  }
+  ]
+ 
 }
