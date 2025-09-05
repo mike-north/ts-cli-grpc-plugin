@@ -39,5 +39,8 @@
   "workspaces": [
     "ts-cli-plugin",
     "examples/*"
-  ]
+  ],
+  "resolutions": {
+    "esbuild": "0.25.8"
+  }
 }
