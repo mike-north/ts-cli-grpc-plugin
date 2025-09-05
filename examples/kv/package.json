@@ -28,7 +28,8 @@
   "scripts": {
     "build": "tsc -P tsconfig.json",
     "clean": "rimraf dist",
-    "lint": "eslint .",
+    "lint:eslint": "eslint .",
+    "fix:eslint": "eslint . --fix",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
