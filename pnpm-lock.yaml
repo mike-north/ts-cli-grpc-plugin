@@ -50,12 +50,12 @@ importers:
       '@grpc/proto-loader':
         specifier: ^0.8.0
         version: 0.8.0
-      '@mike-north/ts-cli-plugin':
-        specifier: workspace:*
-        version: link:../../ts-cli-plugin
       package-up:
         specifier: ^5.0.0
         version: 5.0.0
+      ts-grpc-cli-plugin:
+        specifier: workspace:*
+        version: link:../../ts-cli-plugin
     devDependencies:
       '@types/node':
         specifier: ^24.3.1

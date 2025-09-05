@@ -12,7 +12,7 @@ import * as protoLoader from '@grpc/proto-loader'
 import * as path from 'node:path'
 import * as fsp from 'node:fs/promises'
 
-import { servePlugin } from '@mike-north/ts-cli-plugin'
+import { servePlugin } from 'ts-grpc-cli-plugin'
 
 // For simplicity, this example resolves kv.proto relative to the repo layout.
 // In your own project, point to your compiled protos or absolute proto paths.

@@ -8,8 +8,6 @@
     "sourceMap": true,
     "strict": true,
     "skipLibCheck": false,
-    "allowJs": true,
-    "checkJs": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": ["eslint.config.mts", "knip.config.ts"],

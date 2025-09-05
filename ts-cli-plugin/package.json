@@ -1,5 +1,5 @@
 {
-  "name": "@mike-north/ts-cli-plugin",
+  "name": "ts-grpc-cli-plugin",
   "description": "",
   "version": "0.0.1",
   "author": "Mike North",
@@ -47,5 +47,5 @@
     "rebuild": "pnpm clean && pnpm build && pnpm build",
     "test": "vitest run"
   },
-  "types": "dist/ts-cli-plugin.d.ts"
+  "types": "dist/ts-grpc-cli-plugin.d.ts"
 }
