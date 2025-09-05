@@ -1,4 +1,4 @@
-## ts-cli-grpc-plugin (monorepo)
+## ts-cli-grpc-plugin (monorepo) [![CI](https://github.com/mike-north/ts-cli-grpc-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/mike-north/ts-cli-grpc-plugin/actions/workflows/ci.yml)
 
 TypeScript gRPC plugin toolkit compatible with HashiCorp's go-plugin, plus runnable examples and the upstream `go-plugin` pinned as a submodule.
 
