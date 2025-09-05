@@ -35,15 +35,16 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
-      syncpack:
-        specifier: 14.0.0-alpha.19
-        version: 14.0.0-alpha.19
       typescript:
         specifier: 5.8.2
         version: 5.8.2
       typescript-eslint:
         specifier: ^8.42.0
         version: 8.42.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.8.2)
+    optionalDependencies:
+      syncpack:
+        specifier: 14.0.0-alpha.19
+        version: 14.0.0-alpha.19
 
   examples/kv:
     dependencies:
@@ -5117,6 +5118,7 @@ snapshots:
   get-tsconfig@4.10.1:
     dependencies:
       resolve-pkg-maps: 1.0.0
+    optional: true
 
   git-raw-commits@3.0.0:
     dependencies:
@@ -6331,7 +6333,8 @@ snapshots:
 
   resolve-from@5.0.0: {}
 
-  resolve-pkg-maps@1.0.0: {}
+  resolve-pkg-maps@1.0.0:
+    optional: true
 
   resolve.exports@2.0.3: {}
 
@@ -6584,6 +6587,7 @@ snapshots:
       syncpack-linux-x64: 14.0.0-alpha.19
       syncpack-windows-arm64: 14.0.0-alpha.19
       syncpack-windows-x64: 14.0.0-alpha.19
+    optional: true
 
   tar-stream@2.2.0:
     dependencies:
@@ -6663,6 +6667,7 @@ snapshots:
       get-tsconfig: 4.10.1
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   tuf-js@2.2.1:
     dependencies:
