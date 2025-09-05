@@ -3,11 +3,6 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": [
-    "**/src/**/*.ts",
-    "**/test/**/*.ts",
-    "eslint.config.mts",
-    "knip.config.ts"
-  ],
+  "include": ["**/src/**/*.ts", "**/test/**/*.ts", "eslint.config.mts", "knip.config.ts"],
   "exclude": ["node_modules", "**/dist/**/*"]
 }

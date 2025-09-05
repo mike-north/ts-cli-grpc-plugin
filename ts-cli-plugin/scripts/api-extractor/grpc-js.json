@@ -12,9 +12,7 @@
         "skipLibCheck": true,
         "strict": false
       },
-      "files": [
-        "<projectFolder>/build/src/index.d.ts"
-      ]
+      "files": ["<projectFolder>/build/src/index.d.ts"]
     }
   },
   "apiReport": {

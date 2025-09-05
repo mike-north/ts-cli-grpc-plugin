@@ -1,6 +1,6 @@
-import * as eslint from "@eslint/js";
-import { defineConfig } from "eslint/config";
-import tseslint from "typescript-eslint";
+import * as eslint from '@eslint/js'
+import { defineConfig } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
 export default defineConfig(
   eslint.configs.recommended,
@@ -14,19 +14,15 @@ export default defineConfig(
     },
   },
   {
-    ignores: [
-      "**/dist/**/*",
-      "ts-cli-plugin/bin/**",
-      "ts-cli-plugin/scripts/**",
-    ],
+    ignores: ['**/dist/**/*', 'ts-cli-plugin/bin/**', 'ts-cli-plugin/scripts/**'],
   },
   {
-    files: ["**/src/**/*.ts", "**/test/**/*.ts", "examples/**/*.ts"],
+    files: ['**/src/**/*.ts', '**/test/**/*.ts', 'examples/**/*.ts'],
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
     },
   },
-);
+)

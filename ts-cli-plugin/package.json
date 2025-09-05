@@ -34,14 +34,17 @@
     "compile:docs": "api-documenter markdown --input ./temp/combined --output ./docs && pnpm fix:format",
     "compile:ts": "tsc -P tsconfig.build.json && pnpm run copy-assets",
     "copy-assets": "cp -R src/protos dist/protos 2>/dev/null || true && pnpm fix:format",
+    "fix:all": "pnpm fix:eslint && pnpm fix:format",
+    "fix:eslint": "eslint . --fix",
+    "fix:format": "prettier --write .",
+    "lint": "pnpm lint:all",
+    "lint:all": "pnpm lint:eslint && pnpm lint:typecheck && pnpm lint:format",
     "lint:eslint": "eslint .",
     "lint:format": "prettier --check .",
-    "fix:eslint": "eslint . --fix",
+    "lint:typecheck": "tsc --noEmit",
     "prepare": "pnpm build",
     "rebuild": "pnpm clean && pnpm build && pnpm build",
-    "test": "vitest run",
-    "fix:format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "test": "vitest run"
   },
   "types": "dist/ts-cli-plugin.d.ts"
 }

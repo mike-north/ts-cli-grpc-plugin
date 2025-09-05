@@ -28,10 +28,12 @@
   "scripts": {
     "build": "tsc -P tsconfig.json",
     "clean": "rimraf dist",
-    "lint:eslint": "eslint .",
     "fix:eslint": "eslint . --fix",
-    "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "lint": "pnpm lint:all",
+    "lint:all": "pnpm lint:eslint && pnpm lint:typecheck",
+    "lint:eslint": "eslint .",
+    "lint:typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "type": "commonjs",
   "types": "dist/plugin.d.ts"

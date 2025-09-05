@@ -93,7 +93,7 @@ protocol
 
 </td><td>
 
-"grpc" \| "netrpc"
+'grpc' \| 'netrpc'
 
 </td><td>
 
