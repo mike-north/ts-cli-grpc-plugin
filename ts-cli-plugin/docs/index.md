@@ -24,7 +24,7 @@ Description
 </td></tr>
 <tr><td>
 
-[ts-cli-plugin](./ts-cli-plugin.md)
+[@mike-north/ts-cli-plugin](./ts-cli-plugin.md)
 
 </td><td>
 

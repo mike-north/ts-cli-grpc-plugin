@@ -10,6 +10,7 @@
     "knip": "^5.63.1",
     "lerna": "^8.2.3",
     "prettier": "^3.6.2",
+    "syncpack": "14.0.0-alpha.19",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.42.0"
   },
@@ -20,15 +21,18 @@
     "clean": "lerna run clean",
     "cleanbuild": "lerna run clean && lerna run build",
     "fix": "pnpm fix:all",
-    "fix:all": "pnpm fix:packages && pnpm fix:knip",
-    "fix:format": "pnpm fix:format:prettier",
+    "fix:all": "pnpm fix:packages && pnpm fix:knip && pnpm fix:syncpack",
+    "fix:format": "pnpm fix:format:prettier && pnpm fix:format:syncpack",
     "fix:format:prettier": "prettier --write .",
+    "fix:format:syncpack": "syncpack format",
     "fix:knip": "knip --fix --format",
     "fix:packages": "lerna run fix",
+    "fix:syncpack": "syncpack fix",
     "lint": "pnpm lint:all",
-    "lint:all": "pnpm lint:packages && pnpm lint:knip",
+    "lint:all": "pnpm lint:packages && pnpm lint:knip && pnpm lint:syncpack",
     "lint:knip": "knip",
     "lint:packages": "lerna run lint:all",
+    "lint:syncpack": "syncpack lint",
     "test": "lerna run test",
     "prepare": "husky"
   },
@@ -36,5 +40,4 @@
     "ts-cli-plugin",
     "examples/*"
   ]
- 
 }

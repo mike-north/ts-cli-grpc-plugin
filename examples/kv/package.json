@@ -5,7 +5,7 @@
     "@grpc/grpc-js": "^1.13.4",
     "@grpc/proto-loader": "^0.8.0",
     "package-up": "^5.0.0",
-    "ts-cli-plugin": "workspace:*"
+    "@mike-north/ts-cli-plugin": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.3.1",

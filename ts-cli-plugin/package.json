@@ -1,8 +1,8 @@
 {
-  "name": "ts-cli-plugin",
+  "name": "@mike-north/ts-cli-plugin",
   "description": "",
   "version": "0.0.1",
-  "author": "",
+  "author": "Mike North",
   "bin": {
     "ts-cli-plugin": "bin/ts-cli-plugin"
   },
@@ -23,7 +23,7 @@
     "vitest": "^3.2.4"
   },
   "keywords": [],
-  "license": "UNLICENSED",
+  "license": "BSD-2-Clause",
   "main": "dist/index.js",
   "packageManager": "pnpm@10.15.0",
   "scripts": {
