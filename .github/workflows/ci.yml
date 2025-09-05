@@ -28,9 +28,6 @@ jobs:
       - name: Resolve Node version with nodenv
         id: nodever
         uses: nodenv/actions/node-version@v4
-      
-      - name: Setup nodenv
-        uses: nodenv/actions/setup-nodenv@v3
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -38,7 +35,6 @@ jobs:
           node-version: ${{ steps.nodever.outputs.node-version }}
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
-      - run: nodenv version
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
