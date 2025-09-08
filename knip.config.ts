@@ -1,6 +1,9 @@
 import type { KnipConfig } from 'knip'
 
 const cfg: KnipConfig = {
+  ignore: ['commitlint.config.ts'],
+  ignoreDependencies: ['@commitlint/config-conventional', '@commitlint/types'],
+  ignoreBinaries: ['commitlint'],
   workspaces: {
     'ts-cli-plugin': {
       ignoreDependencies: ['rollup'],
@@ -10,6 +13,6 @@ const cfg: KnipConfig = {
       entry: ['src/register.ts', 'src/plugin.ts'],
     },
   },
-} satisfies KnipConfig
+}
 
 export default cfg

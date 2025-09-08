@@ -1,8 +1,19 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true
   },
-  "include": ["**/src/**/*.ts", "**/test/**/*.ts", "eslint.config.mts", "knip.config.ts"],
+  "include": [
+    "**/src/**/*.ts",
+    "**/test/**/*.ts",
+    "./*.js",
+    "./*.ts",
+    "./*.mts",
+    "./*.cjs",
+    "./*.cts",
+    "./*.mjs",
+  ],
   "exclude": ["node_modules", "**/dist/**/*"]
 }

@@ -35,6 +35,8 @@ function findWorkspaceRoot(startDir: string): string {
 }
 const WORKSPACE_FOLDER_PATH = findWorkspaceRoot(path.resolve(__dirname, '..'))
 
+// Expect Go to be available on CI; tests will fail if not present.
+
 /**
  * Spawn a child process and collect stdout/stderr until it exits.
  *
@@ -85,18 +87,53 @@ function run(
   })
 }
 
+function augmentPathForGo(originalPath: string | undefined): string {
+  const home = process.env.HOME || process.env.USERPROFILE || ''
+  const extraPaths = [
+    '/opt/homebrew/bin',
+    '/usr/local/bin',
+    '/usr/bin',
+    '/usr/local/go/bin',
+    '/opt/local/bin',
+    home ? path.join(home, '.asdf', 'shims') : '',
+    home ? path.join(home, 'go', 'bin') : '',
+    home ? path.join(home, 'bin') : '',
+  ].filter(Boolean)
+  const parts = new Set<string>(
+    (originalPath ? originalPath.split(':') : []).concat(extraPaths),
+  )
+  return Array.from(parts).join(':')
+}
+
 describe('KV example plugin', () => {
   it('should put and get via Go host', async () => {
     const repoRoot = WORKSPACE_FOLDER_PATH
-    const goHostDir = path.join(repoRoot, 'go-plugin/examples/grpc')
+    const goHostDir =
+      process.env.GO_HOST_DIR && process.env.GO_HOST_DIR.length > 0
+        ? process.env.GO_HOST_DIR
+        : path.join(repoRoot, 'go-plugin/examples/grpc')
     const kvBinary = path.join(goHostDir, 'kv')
+    const envWithGoPath: NodeJS.ProcessEnv = { ...process.env }
+    if (!fs.existsSync(goHostDir)) {
+      // Host example sources are not present; skip this test locally
+      return
+    }
+
+    envWithGoPath.PATH = augmentPathForGo(process.env.PATH)
+    const goBinaryOverride = process.env.GO_BINARY
+    const goCmd =
+      goBinaryOverride && fs.existsSync(goBinaryOverride) ? goBinaryOverride : 'go'
 
     // Build the Go host binary if not present
-    const build = await run('go', ['build', '-o', kvBinary], {
-      env: process.env,
+    const build = await run(goCmd, ['build', '-o', kvBinary], {
+      env: envWithGoPath,
       cwd: goHostDir,
     })
-    expect(build.code).toBe(0)
+    if (build.code !== 0) {
+      throw new Error(
+        `Failed to build Go host. Ensure Go is installed and accessible.\nStdout:\n${build.stdout}\nStderr:\n${build.stderr}\nIf Go is installed in a non-standard location, set GO_BINARY to the absolute path.`,
+      )
+    }
 
     const cliBin = path.join(repoRoot, 'ts-cli-plugin/bin/ts-cli-plugin')
     const registerModule = path.join(repoRoot, 'examples/kv/src/register.ts')

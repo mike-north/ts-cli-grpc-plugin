@@ -17,6 +17,14 @@ export default defineConfig(
     ignores: ['**/dist/**/*', 'ts-cli-plugin/bin/**', 'ts-cli-plugin/scripts/**'],
   },
   {
+    files: ['./*.cjs'],
+    languageOptions: {
+      globals: {
+        module: 'readonly',
+      },
+    },
+  },
+  {
     files: ['**/src/**/*.ts', '**/test/**/*.ts', 'examples/**/*.ts'],
     rules: {
       '@typescript-eslint/no-unused-vars': [
