@@ -2,7 +2,7 @@ import type { KnipConfig } from 'knip'
 
 const cfg: KnipConfig = {
   ignore: ['commitlint.config.ts'],
-  ignoreDependencies: ['@commitlint/config-conventional', '@commitlint/types'],
+  ignoreDependencies: ['@commitlint/config-conventional'],
   ignoreBinaries: ['commitlint'],
   workspaces: {
     'ts-cli-plugin': {
