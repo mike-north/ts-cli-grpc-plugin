@@ -1,7 +1,7 @@
 {
   "name": "ts-cli-grpc-plugin",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "author": "Mike North",
   "bin": {
     "ts-cli-plugin": "bin/ts-cli-plugin"
