@@ -1,5 +1,5 @@
 ---
-'typescript-cli-grpc-plugin': minor
+'ts-cli-grpc-plugin': minor
 ---
 
 The first minor version of this project
