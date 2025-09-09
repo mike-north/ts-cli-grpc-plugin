@@ -1,6 +1,6 @@
 ## Examples
 
-Example plugins built with `ts-cli-plugin`.
+Example plugins built with `ts-cli-grpc-plugin`.
 
 Available examples:
 

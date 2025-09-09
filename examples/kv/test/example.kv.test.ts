@@ -135,7 +135,7 @@ describe('KV example plugin', () => {
       )
     }
 
-    const cliBin = path.join(repoRoot, 'ts-cli-plugin/bin/ts-cli-plugin')
+    const cliBin = path.join(repoRoot, 'ts-cli-grpc-plugin/bin/ts-cli-plugin')
     const registerModule = path.join(repoRoot, 'examples/kv/src/register.ts')
 
     const envPut: NodeJS.ProcessEnv = { ...process.env }

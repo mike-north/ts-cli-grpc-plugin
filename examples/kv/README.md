@@ -1,11 +1,11 @@
 ## KV Example
 
-Key-value plugin implemented in TypeScript using `ts-cli-plugin`, interoperating with the upstream Go host from `hashicorp/go-plugin`.
+Key-value plugin implemented in TypeScript using `ts-cli-grpc-plugin`, interoperating with the upstream Go host from `hashicorp/go-plugin`.
 
 ### Build
 
 ```bash
-pnpm --filter ts-cli-plugin build
+pnpm --filter ts-cli-grpc-plugin build
 pnpm --filter @examples/kv build
 ```
 
@@ -18,7 +18,7 @@ go build -o kv
 cd -
 
 # Point the host to this plugin via the CLI wrapper
-export KV_PLUGIN="node $(pwd)/ts-cli-plugin/bin/ts-cli-plugin \
+export KV_PLUGIN="node $(pwd)/ts-cli-grpc-plugin/bin/ts-cli-plugin \
   --module $(pwd)/examples/kv/src/register.ts \
   --address 127.0.0.1 \
   --app-proto-version 1"

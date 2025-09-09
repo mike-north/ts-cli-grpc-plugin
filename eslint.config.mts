@@ -14,7 +14,7 @@ export default defineConfig(
     },
   },
   {
-    ignores: ['**/dist/**/*', 'ts-cli-plugin/bin/**', 'ts-cli-plugin/scripts/**'],
+    ignores: ['**/dist/**/*', 'ts-cli-grpc-plugin/bin/**', 'ts-cli-grpc-plugin/scripts/**'],
   },
   {
     files: ['./*.cjs'],

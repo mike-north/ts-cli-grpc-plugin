@@ -12,7 +12,7 @@ import * as protoLoader from '@grpc/proto-loader'
 import * as path from 'node:path'
 import * as fsp from 'node:fs/promises'
 
-import { servePlugin } from 'ts-cli-grpc-plugin'
+import { servePlugin, type ServeOptions } from 'ts-cli-grpc-plugin'
 
 // For simplicity, this example resolves kv.proto relative to the repo layout.
 // In your own project, point to your compiled protos or absolute proto paths.
@@ -83,22 +83,29 @@ const kvImpl = {
 }
 
 // Start the plugin server and print the go-plugin handshake line to stdout
-void servePlugin({
-  appProtocolVersion: 1,
-  address: '127.0.0.1',
-  networkType: 'tcp',
-  register(server: grpc.Server) {
-    server.addService(
-      proto.KV.service,
-      kvImpl as unknown as grpc.UntypedServiceImplementation,
-    )
-  },
-}).catch((err: unknown) => {
-  // Ensure any startup error is visible to the host
-  if (err instanceof Error) {
-    console.error('Plugin startup failed:', err.message)
-  } else {
-    console.error('Plugin startup failed with unknown error:', String(err))
+async function startPlugin(): Promise<void> {
+  try {
+    const options: ServeOptions = {
+      appProtocolVersion: 1,
+      address: '127.0.0.1',
+      networkType: 'tcp',
+      register(server: grpc.Server) {
+        server.addService(
+          proto.KV.service,
+          kvImpl as unknown as grpc.UntypedServiceImplementation,
+        )
+      },
+    }
+    await servePlugin(options)
+  } catch (err: unknown) {
+    // Ensure any startup error is visible to the host
+    if (err instanceof Error) {
+      console.error('Plugin startup failed:', err.message)
+    } else {
+      console.error('Plugin startup failed with unknown error:', String(err))
+    }
+    process.exit(1)
   }
-  process.exit(1)
-})
+}
+
+void startPlugin()
