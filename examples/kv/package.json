@@ -1,6 +1,6 @@
 {
   "name": "@examples/kv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "@grpc/grpc-js": "^1.13.4",
     "@grpc/proto-loader": "^0.8.0",
