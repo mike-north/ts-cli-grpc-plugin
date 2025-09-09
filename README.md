@@ -20,6 +20,35 @@ git submodule update --init
 pnpm install
 ```
 
+### Contributing
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) for commit messages. All commit messages must follow the conventional commit format:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+**Examples:**
+- `feat: add new gRPC health check service`
+- `fix(cli): resolve issue with plugin handshake timeout`
+- `docs: update README with contributing guidelines`
+- `chore: bump dependencies to latest versions`
+
+**Common types:**
+- `feat`: new feature
+- `fix`: bug fix
+- `docs`: documentation changes
+- `style`: formatting, missing semi colons, etc.
+- `refactor`: code change that neither fixes a bug nor adds a feature
+- `test`: adding missing tests
+- `chore`: updating build tasks, package manager configs, etc.
+
+Commit messages are automatically validated using commitlint on every pull request.
+
 ### Build and test
 
 ```bash
