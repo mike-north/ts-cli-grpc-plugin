@@ -24,7 +24,7 @@ Description
 </td></tr>
 <tr><td>
 
-[@mike-north/ts-cli-plugin](./ts-cli-plugin.md)
+[ts-cli-grpc-plugin](./ts-cli-grpc-plugin.md)
 
 </td><td>
 
@@ -34,7 +34,7 @@ This package exposes small, focused primitives to help you bring up a gRPC serve
 
 - Registers the gRPC Health service and reports SERVING for service "plugin" so the host can probe readiness - Emits the expected handshake line on stdout in the form `CORE|APP|NETWORK|ADDR|grpc` so the host can connect - Optionally wires up the internal `GRPCStdio` and `GRPCController` services when the corresponding protos are present - Lets you register your own gRPC services via a simple callback
 
-The most common entry point is [servePlugin()](./ts-cli-plugin.serveplugin.md)<!-- -->, which binds a local server and writes the handshake line that the host process consumes on stdout. For convenience, [formatHandshake()](./ts-cli-plugin.formathandshake.md) is also exported if you need to compute the handshake string manually.
+The most common entry point is , which binds a local server and writes the handshake line that the host process consumes on stdout. For convenience, is also exported if you need to compute the handshake string manually.
 
 </td></tr>
 </tbody></table>

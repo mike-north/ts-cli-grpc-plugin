@@ -1,7 +1,10 @@
 {
   "name": "ts-cli-grpc-plugin-workspace",
   "version": "0.0.1",
+  "type": "module",
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.34.0",
     "@types/node": "^24.3.1",
     "eslint": "^9.34.0",
@@ -34,7 +37,8 @@
     "lint:packages": "lerna run lint:all",
     "lint:syncpack": "syncpack lint",
     "test": "lerna run test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commitlint": "commitlint --from=HEAD~1 --to=HEAD --verbose"
   },
   "workspaces": [
     "ts-cli-grpc-plugin",

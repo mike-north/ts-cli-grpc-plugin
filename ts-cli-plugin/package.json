@@ -28,7 +28,7 @@
   "packageManager": "pnpm@10.15.0",
   "scripts": {
     "api:extract": "api-extractor run --local",
-    "api:extract:deps": "api-extractor run --local --config ./scripts/api-extractor/grpc-js.json && node ./scripts/rename-grpc-json.js && mkdir -p temp/combined && cp -f temp/ts-cli-plugin.api.json temp/combined/ && cp -f temp/@grpc/grpc-js.api.json temp/combined/",
+    "api:extract:deps": "api-extractor run --local --config ./scripts/api-extractor/grpc-js.json && node ./scripts/rename-grpc-json.js && mkdir -p temp/combined && cp -f temp/ts-cli-grpc-plugin.api.json temp/combined/ && cp -f temp/@grpc/grpc-js.api.json temp/combined/",
     "build": "pnpm compile:ts && pnpm api:extract && pnpm api:extract:deps && pnpm compile:docs",
     "clean": "rimraf dist docs etc/* temp/combined temp/@grpc/grpc-js.api.json",
     "compile:docs": "api-documenter markdown --input ./temp/combined --output ./docs && pnpm fix:format",
