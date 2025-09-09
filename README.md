@@ -2,7 +2,7 @@
 
 TypeScript gRPC plugin toolkit compatible with HashiCorp's go-plugin, plus runnable examples and the upstream `go-plugin` pinned as a submodule.
 
-- `ts-cli-plugin/`: TypeScript library and CLI wrapper for serving plugins over gRPC
+- `ts-cli-grpc-plugin/`: TypeScript library and CLI wrapper for serving plugins over gRPC
 - `examples/`: Example plugins built with the library (e.g., `kv/`)
 - `go-plugin/`: Upstream HashiCorp `go-plugin` submodule used for proto definitions and host examples (pinned)
 
@@ -61,7 +61,7 @@ pnpm test    # runs workspace tests
 1. Build the TypeScript library and example code
 
 ```bash
-pnpm --filter ts-cli-plugin build
+pnpm --filter ts-cli-grpc-plugin build
 pnpm --filter @examples/kv build
 ```
 
@@ -76,7 +76,7 @@ cd -
 3. Launch the Go host, pointing it at the Node plugin via the CLI wrapper
 
 ```bash
-export KV_PLUGIN="node $(pwd)/ts-cli-plugin/bin/ts-cli-plugin \
+export KV_PLUGIN="node $(pwd)/ts-cli-grpc-plugin/bin/ts-cli-plugin \
   --module $(pwd)/examples/kv/src/register.ts \
   --address 127.0.0.1 \
   --app-proto-version 1"
@@ -108,13 +108,13 @@ Cmd: exec.Command("sh", "-c", os.Getenv("KV_PLUGIN")),
 ```
 ts-cli-grpc-plugin/
   README.md                 # this file (monorepo overview)
-  ts-cli-plugin/            # TypeScript library and CLI wrapper
+  ts-cli-grpc-plugin/       # TypeScript library and CLI wrapper
   examples/                 # example plugins (see README inside)
   go-plugin/                # upstream submodule (HashiCorp go-plugin)
 ```
 
 ### More docs
 
-- TypeScript library: `ts-cli-plugin/README.md`
+- TypeScript library: `ts-cli-grpc-plugin/README.md`
 - Examples: `examples/README.md`
 - Upstream background and architecture: [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin)

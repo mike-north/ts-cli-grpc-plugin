@@ -5,7 +5,7 @@ const cfg: KnipConfig = {
   ignoreDependencies: ['@commitlint/types'],
   ignoreBinaries: [],
   workspaces: {
-    'ts-cli-plugin': {
+    'ts-cli-grpc-plugin': {
       ignoreDependencies: ['rollup'],
       entry: ['src/index.ts', './bin/ts-cli-plugin'],
     },

@@ -1,5 +1,5 @@
 packages:
-  - ts-cli-plugin
+  - ts-cli-grpc-plugin
   - examples/*
 onlyBuiltDependencies:
   - esbuild
